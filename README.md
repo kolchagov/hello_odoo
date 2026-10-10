@@ -1,6 +1,7 @@
 # Hello Odoo
 
-An Odoo 20 addon with a simple username greeting page.
+An Odoo 20 backend app with a stateless username greeting form.
 
-Install the `Hello Odoo` app, then open `/hello_odoo`. Enter a username and
-select **Say hello** to see `Hello {username} from Odoo 20`.
+Install `Hello Odoo` from Apps, then open the app and choose **Say Hello**.
+Enter a username and click **Say hello** to see `Hello {username} from Odoo 20`.
+The form uses a transient record; it does not keep greeting history.

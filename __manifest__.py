@@ -1,10 +1,14 @@
 {
     "name": "Hello Odoo",
-    "version": "20.0.1.0.0",
+    "version": "20.0.2.0.0",
     "category": "Productivity",
-    "summary": "A simple username greeting page",
+    "summary": "A stateless backend greeting app",
     "application": True,
     "author": "Kolchagov",
     "license": "Other OSI approved licence",
-    "data": ["views/hello_odoo_templates.xml"],
+    "data": [
+        "security/ir.access.csv",
+        "views/hello_greeting_views.xml",
+        "views/hello_greeting_menus.xml",
+    ],
 }
