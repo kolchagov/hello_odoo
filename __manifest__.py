@@ -4,6 +4,7 @@
     "category": "Productivity",
     "summary": "A simple username greeting page",
     "application": True,
-    "license": "MIT",
+    "author": "Kolchagov",
+    "license": "Other OSI approved licence",
     "data": ["views/hello_odoo_templates.xml"],
 }
