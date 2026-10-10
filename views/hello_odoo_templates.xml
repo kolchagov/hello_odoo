@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hello_odoo_page" name="Hello Odoo">
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>Hello Odoo</title>
+                <style>
+                    * { box-sizing: border-box; }
+                    body {
+                        display: grid;
+                        min-height: 100vh;
+                        margin: 0;
+                        padding: 24px;
+                        place-items: center;
+                        background: #f3f7f7;
+                        color: #153532;
+                        font-family: system-ui, sans-serif;
+                    }
+                    .o_hello_odoo_card {
+                        width: min(100%, 440px);
+                        padding: 40px;
+                        border: 1px solid #dce8e6;
+                        border-radius: 16px;
+                        background: #fff;
+                        box-shadow: 0 16px 48px rgb(21 53 50 / 8%);
+                    }
+                    .o_hello_odoo_label {
+                        display: block;
+                        margin-bottom: 8px;
+                        font-weight: 600;
+                    }
+                    .o_hello_odoo_input {
+                        width: 100%;
+                        min-height: 48px;
+                        padding: 12px;
+                        border: 1px solid #9bb8b3;
+                        border-radius: 8px;
+                        color: inherit;
+                        font: inherit;
+                    }
+                    .o_hello_odoo_input:focus-visible,
+                    .o_hello_odoo_button:focus-visible {
+                        outline: 3px solid #0d9488;
+                        outline-offset: 2px;
+                    }
+                    .o_hello_odoo_button {
+                        width: 100%;
+                        min-height: 48px;
+                        margin-top: 16px;
+                        border: 0;
+                        border-radius: 8px;
+                        background: #0d766d;
+                        color: #fff;
+                        cursor: pointer;
+                        font: inherit;
+                        font-weight: 700;
+                    }
+                    .o_hello_odoo_button:hover { background: #095f58; }
+                    .o_hello_odoo_greeting {
+                        margin: 24px 0 0;
+                        font-size: 1.25rem;
+                        font-weight: 700;
+                    }
+                    .o_hello_odoo_error { color: #b42318; }
+                    @media (max-width: 480px) {
+                        .o_hello_odoo_card { padding: 28px 24px; }
+                    }
+                </style>
+            </head>
+            <body>
+                <main class="o_hello_odoo_card">
+                    <h1>Say hello</h1>
+                    <form action="/hello_odoo" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <label class="o_hello_odoo_label" for="username">Username</label>
+                        <input
+                            class="o_hello_odoo_input"
+                            id="username"
+                            name="username"
+                            type="text"
+                            maxlength="80"
+                            required="required"
+                            autocomplete="nickname"
+                            t-att-value="username"
+                            t-att-aria-invalid="'true' if error else 'false'"
+                            t-att-aria-describedby="'username-error' if error else None"
+                        />
+                        <button class="o_hello_odoo_button" type="submit">Say hello</button>
+                    </form>
+                    <p
+                        t-if="error"
+                        id="username-error"
+                        class="o_hello_odoo_error"
+                        role="alert"
+                    ><t t-out="error"/></p>
+                    <p
+                        t-if="submitted and not error"
+                        class="o_hello_odoo_greeting"
+                        role="status"
+                    ><span>Hello </span><t t-out="username"/><span> from Odoo 20</span></p>
+                </main>
+            </body>
+        </html>
+    </template>
+</odoo>
