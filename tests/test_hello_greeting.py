@@ -9,8 +9,9 @@ class TestHelloGreeting(BaseCommon):
 
         self.assertFalse(root_menu.parent_id)
         self.assertEqual(greeting_menu.parent_id, root_menu)
-        self.assertEqual(greeting_menu.action.res_model, "hello.greeting")
-        self.assertEqual(greeting_menu.action.view_mode, "form")
+        action = greeting_menu.sudo().action
+        self.assertEqual(action.res_model, "hello.greeting")
+        self.assertEqual(action.view_mode, "form")
 
     def test_say_hello_strips_username(self):
         greeting = self.env["hello.greeting"].create({"username": "  Ada  "})
