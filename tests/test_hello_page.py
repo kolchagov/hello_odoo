@@ -1,6 +1,16 @@
 import re
+from html.parser import HTMLParser
 
 from odoo.tests import HttpCase
+
+
+class TextParser(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.text = []
+
+    def handle_data(self, data):
+        self.text.append(data)
 
 
 class TestHelloPage(HttpCase):
@@ -23,4 +33,7 @@ class TestHelloPage(HttpCase):
             "/hello_odoo",
             data={"csrf_token": csrf_token.group(1), "username": "<Ada>"},
         )
-        self.assertIn("Hello &lt;Ada&gt; from Odoo 20", greeting.text)
+        visible_text = TextParser()
+        visible_text.feed(greeting.text)
+        self.assertIn("Hello <Ada> from Odoo 20", "".join(visible_text.text))
+        self.assertIn("&lt;Ada&gt;", greeting.text)

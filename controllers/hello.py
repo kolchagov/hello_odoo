@@ -10,7 +10,7 @@ class HelloOdoo(http.Controller):
         methods=["GET", "POST"],
         csrf=True,
     )
-    def index(self):
+    def index(self, **_kwargs):
         submitted = request.httprequest.method == "POST"
         username = request.httprequest.form.get("username", "").strip() if submitted else ""
         error = False
