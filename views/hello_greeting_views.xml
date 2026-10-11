@@ -16,14 +16,6 @@
                         <field name="greeting" readonly="1" nolabel="1"/>
                     </group>
                 </sheet>
-                <footer>
-                    <button
-                        name="action_say_hello"
-                        type="object"
-                        string="Say hello"
-                        class="btn-primary"
-                    />
-                </footer>
             </form>
         </field>
     </record>

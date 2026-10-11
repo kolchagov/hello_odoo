@@ -13,16 +13,19 @@ class TestHelloGreeting(BaseCommon):
         self.assertEqual(action.res_model, "hello.greeting")
         self.assertEqual(action.view_mode, "form")
 
-    def test_say_hello_strips_username(self):
+    def test_save_displays_greeting(self):
         greeting = self.env["hello.greeting"].create({"username": "  Ada  "})
 
-        greeting.action_say_hello()
-
         self.assertEqual(greeting.username, "Ada")
-        self.assertEqual(greeting.greeting, "Hello Ada from Odoo 20")
+        self.assertEqual(greeting.greeting, "Greetings from Odoo, Ada")
 
-    def test_say_hello_rejects_blank_username(self):
-        greeting = self.env["hello.greeting"].create({"username": "   "})
+    def test_saving_username_updates_greeting(self):
+        greeting = self.env["hello.greeting"].create({"username": "Ada"})
+        greeting.write({"username": " Grace "})
 
+        self.assertEqual(greeting.username, "Grace")
+        self.assertEqual(greeting.greeting, "Greetings from Odoo, Grace")
+
+    def test_save_rejects_blank_username(self):
         with self.assertRaises(UserError):
-            greeting.action_say_hello()
+            self.env["hello.greeting"].create({"username": "   "})
